@@ -1,30 +1,67 @@
+import 'package:developer_test/screens/add-todo-screen.dart';
+import 'package:developer_test/screens/edit-todo-screen.dart';
+import 'package:developer_test/screens/json-placeholder-consumer.dart';
+import 'package:developer_test/screens/todo-screen.dart';
+import 'package:developer_test/screens/view-todo-screen.dart';
+import 'package:developer_test/state/state.dart';
 import 'package:developer_test/widgets/input.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'debug.dart';
+import 'models/Todo.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    /// Providers are above [MyApp] instead of inside it, so that tests
+    /// can use [MyApp] while mocking the providers
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AppState()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+        onGenerateRoute: _routes(),
+        title: "Todoapp",
+        theme: ThemeData(
+            // appBarTheme: AppBarTheme(
+            //   textTheme: TextTheme(title: AppBarTextStyle),
+            ),
+        initialRoute: "/",
+        routes: {
+          "/": (ctx) => TodoScreen(),
+          "/add-todo": (ctx) => AddTodoScreen(),
+          "/json-placeholder": (ctx) => JsonPlaceHolderScreen()
+        });
+  }
+
+  RouteFactory _routes() {
+    return (settings) {
+      Widget screen = TodoScreen();
+      switch (settings.name) {
+        case "/view-todo":
+          int todoId = settings.arguments! as int;
+          screen = ViewTodoScreen(todoId: todoId);
+          break;
+
+        case "/edit-todo":
+          Todo todo = settings.arguments! as Todo;
+          screen = EditTodoScreen(todo: todo);
+          break;
+        default:
+          Debug.log("Not supposed to reach here");
+          break;
+      }
+
+      return MaterialPageRoute(builder: (BuildContext context) => screen);
+    };
   }
 }
 
