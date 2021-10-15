@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'debug.dart';
-import 'models/Todo.dart';
+import 'models/todo.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

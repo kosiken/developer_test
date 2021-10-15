@@ -1,5 +1,5 @@
 import 'package:developer_test/debug.dart';
-import 'package:developer_test/models/Todo.dart';
+import 'package:developer_test/models/todo.dart';
 import 'package:flutter/cupertino.dart';
 
 class AppState with ChangeNotifier {

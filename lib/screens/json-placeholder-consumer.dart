@@ -1,5 +1,5 @@
 import 'package:developer_test/constants/colors.dart';
-import 'package:developer_test/models/Todo.dart';
+import 'package:developer_test/models/todo.dart';
 import 'package:developer_test/state/state.dart';
 import 'package:developer_test/widgets/button.dart';
 import 'package:developer_test/widgets/typography.dart';
@@ -11,8 +11,6 @@ class JsonPlaceHolderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appState = Provider.of<AppState>(context, listen: true);
-
     return Container(
         padding: EdgeInsets.only(left: 10, right: 10),
         child: SafeArea(
