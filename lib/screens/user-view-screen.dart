@@ -5,13 +5,19 @@ import 'package:developer_test/widgets/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../debug.dart';
+
 class UserViewScreen extends StatelessWidget {
   const UserViewScreen({Key? key, required this.user}) : super(key: key);
   final JsonPlaceholderApiUser user;
 
   void _launchURLBrowser(BuildContext context, String url) async {
     if (await canLaunch(url)) {
-      await launch(url);
+      try {
+        await launch(url);
+      } catch (e) {
+        Debug.log('FAILED: launch $url');
+      }
     } else {
       showDialog(
           barrierDismissible: true,
