@@ -3,12 +3,36 @@ import 'package:developer_test/models/json-placeholder-response.dart';
 import 'package:developer_test/widgets/button.dart';
 import 'package:developer_test/widgets/typography.dart';
 import 'package:flutter/material.dart';
-
-// TODO Link to webpage;
+import 'package:url_launcher/url_launcher.dart';
 
 class UserViewScreen extends StatelessWidget {
   const UserViewScreen({Key? key, required this.user}) : super(key: key);
   final JsonPlaceholderApiUser user;
+
+  void _launchURLBrowser(BuildContext context, String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      showDialog(
+          barrierDismissible: true,
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: KosyText("Done"),
+              content: KosyText('Could not launch $url'),
+              actions: <Widget>[
+                KosyTextButton(
+                  child: 'Ok',
+                  clickFunc: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -99,15 +123,20 @@ class UserViewScreen extends StatelessWidget {
                       Row(
                         children: [
                           KosyText(
-                            "Website",
+                            "Website:",
                             bold: true,
                             textAlign: TextAlign.start,
                           ),
                           SizedBox(
                             width: 15,
                           ),
-                          KosyText(user.website,
-                              textAlign: TextAlign.end, color: Colors.blue)
+                          KosyTextButton(
+                              child: "http://" + user.website,
+                              clickFunc: () {
+                                _launchURLBrowser(
+                                    context, "http://" + user.website);
+                              },
+                              color: Colors.blue)
                         ],
                       ),
                       SizedBox(
@@ -115,7 +144,7 @@ class UserViewScreen extends StatelessWidget {
                       ),
                       Divider(),
                       KosyText(
-                        "Residential information",
+                        "Residential information:",
                         bold: true,
                         textAlign: TextAlign.start,
                       ),
@@ -126,7 +155,7 @@ class UserViewScreen extends StatelessWidget {
                           "${user.address.suite} ${user.address.street} ${user.address.zipcode}, ${user.address.city}"),
                       Divider(),
                       KosyText(
-                        "Company information",
+                        "Company information:",
                         bold: true,
                         textAlign: TextAlign.start,
                       ),
