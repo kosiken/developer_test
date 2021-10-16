@@ -5,12 +5,12 @@ import 'package:developer_test/widgets/button.dart';
 import 'package:developer_test/widgets/typography.dart';
 import 'package:flutter/material.dart';
 
-class UsersViewScreen<T> extends StatelessWidget {
-  const UsersViewScreen(
+class ModelsViewScreen<T> extends StatelessWidget {
+  const ModelsViewScreen(
       {Key? key, required this.pathTogo, required this.controller})
       : super(key: key);
   final String pathTogo;
-  final JsonPlaceholderController controller;
+  final JsonPlaceholderController<T> controller;
 
   Widget buildList(BuildContext context, AsyncSnapshot<List<T>> snapshot) {
     if (snapshot.hasError)
@@ -102,7 +102,7 @@ class UsersViewScreen<T> extends StatelessWidget {
                     ),
                     Expanded(
                         child: FutureBuilder<List<T>>(
-                      future: controller.getAllT<T>(),
+                      future: controller.getAllT(),
                       builder: buildList,
                     ))
                   ],

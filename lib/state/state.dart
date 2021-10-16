@@ -3,11 +3,19 @@ import 'package:developer_test/models/todo.dart';
 import 'package:flutter/cupertino.dart';
 
 class AppState with ChangeNotifier {
+  // initially there are two preloded todos
   List<Todo> _todos = Todo.getStaticTodos();
   int _todoIdCount = 2;
 
   void addTodo(Todo todo) {
-    _todos.add(todo);
+    // preserve todo list structure
+    if ((_todos.length) <= todo.id - 1) {
+      print(todo.id.toString() + " ${_todos.length}");
+      _todos.add(todo);
+    } else {
+      _todos.insert(todo.id - 1, todo);
+    }
+
     notifyListeners();
   }
 
@@ -17,6 +25,7 @@ class AppState with ChangeNotifier {
 
   bool removeTodo(int id) {
     int len = _todos.length;
+
     _todos = List.from(_todos.where((element) => element.id != id));
     notifyListeners();
     return len != _todos.length;

@@ -5,7 +5,7 @@ import 'package:developer_test/screens/edit-todo-screen.dart';
 import 'package:developer_test/screens/json-placeholder-consumer.dart';
 import 'package:developer_test/screens/todo-screen.dart';
 import 'package:developer_test/screens/user-view-screen.dart';
-import 'package:developer_test/screens/users-view-screen.dart';
+import 'package:developer_test/screens/models-view-screen.dart';
 import 'package:developer_test/screens/view-describeable.dart';
 import 'package:developer_test/screens/view-jsonplaceholder-todo-screen.dart';
 import 'package:developer_test/screens/view-todo-screen.dart';
@@ -45,33 +45,33 @@ class MyApp extends StatelessWidget {
           "/": (ctx) => TodoScreen(),
           "/add-todo": (ctx) => AddTodoScreen(),
           "/json-placeholder": (ctx) => JsonPlaceHolderScreen(),
-          "/users": (ctx) => UsersViewScreen<JsonPlaceholderApiUser>(
+          "/users": (ctx) => ModelsViewScreen<JsonPlaceholderApiUser>(
                 pathTogo: "/view-user",
                 controller: JsonPlaceholderController<JsonPlaceholderApiUser>(
                     JsonPlaceholderApiUser.fromJSON, "/users"),
               ),
-          "/todos": (ctx) => UsersViewScreen(
+          "/todos": (ctx) => ModelsViewScreen(
                 pathTogo: "/view-jsph-todo",
                 controller: JsonPlaceholderController<JsonPlaceholderApiTodo>(
                     JsonPlaceholderApiTodo.fromJSON, "/todos"),
               ),
-          "/posts": (ctx) => UsersViewScreen(
+          "/posts": (ctx) => ModelsViewScreen(
                 pathTogo: "/view-post",
                 controller: JsonPlaceholderController<JsonPlaceholderApiPost>(
                     JsonPlaceholderApiPost.fromJSON, "/posts"),
               ),
-          "/albums": (ctx) => UsersViewScreen(
+          "/albums": (ctx) => ModelsViewScreen(
                 pathTogo: "/view-album",
                 controller: JsonPlaceholderController<JsonPlaceholderApiAlbum>(
                     JsonPlaceholderApiAlbum.fromJSON, "/albums"),
               ),
-          "/comments": (ctx) => UsersViewScreen(
+          "/comments": (ctx) => ModelsViewScreen(
                 pathTogo: "/view-comment",
                 controller:
                     JsonPlaceholderController<JsonPlaceholderApiComment>(
                         JsonPlaceholderApiComment.fromJSON, "/comments"),
               ),
-          "/photos": (ctx) => UsersViewScreen(
+          "/photos": (ctx) => ModelsViewScreen(
                 pathTogo: "/view-photo",
                 controller: JsonPlaceholderController<JsonPlaceholderApiPhoto>(
                     JsonPlaceholderApiPhoto.fromJSON, "/photos"),

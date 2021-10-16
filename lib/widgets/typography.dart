@@ -28,6 +28,7 @@ class KosyText extends StatelessWidget {
   }
 
   Color getDefaultColor(BuildContext context) {
+    // adjust to dark mode
     var brightness = MediaQuery.of(context).platformBrightness;
     bool isDarkMode = !kIsWeb && (brightness == Brightness.dark);
 
