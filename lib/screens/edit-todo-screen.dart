@@ -45,9 +45,6 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
                     children: [
                       KosyTextButton(
                           clickFunc: () {
-                            var appState =
-                                Provider.of<AppState>(context, listen: false);
-
                             Navigator.of(context).pop();
                           },
                           child: "Go Back"),

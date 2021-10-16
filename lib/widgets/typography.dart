@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:developer_test/constants/colors.dart';
@@ -13,7 +14,7 @@ class KosyText extends StatelessWidget {
   final double? height;
   final String body;
 
-  final Color color;
+  final Color? color;
 
   static TextStyle relicTextStyles(
       double? size, FontWeight? fontWeight, Color? color) {
@@ -26,16 +27,23 @@ class KosyText extends StatelessWidget {
     ));
   }
 
+  Color getDefaultColor(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = !kIsWeb && (brightness == Brightness.dark);
+
+    return isDarkMode ? Colors.white : TextEmphasisColor;
+  }
+
   KosyText(this.body,
       {this.textAlign = TextAlign.left,
       this.bold = false,
       this.type = TextTypes.body,
       Key? key,
-      this.color = TextForegroundColor,
+      this.color,
       this.height})
       : super(key: key);
 
-  TextStyle _generateTextStyle() {
+  TextStyle _generateTextStyle(BuildContext context) {
     Measurements measurements = Measurements.instance;
     double size = 0;
     switch (this.type) {
@@ -70,12 +78,12 @@ class KosyText extends StatelessWidget {
                 ? FontWeight.w700
                 : FontWeight.normal,
         decoration: TextDecoration.none,
-        color: this.color,
+        color: this.color ?? getDefaultColor(context),
         height: height);
   }
 
   Widget build(BuildContext context) {
-    TextStyle textStyle = _generateTextStyle();
+    TextStyle textStyle = _generateTextStyle(context);
     return Text(
       body,
       textDirection: TextDirection.ltr,

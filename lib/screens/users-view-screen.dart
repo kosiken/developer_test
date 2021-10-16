@@ -1,13 +1,9 @@
 import 'package:developer_test/constants/colors.dart';
 import 'package:developer_test/controllers/json-placeholder-api.dart';
 import 'package:developer_test/debug.dart';
-import 'package:developer_test/models/json-placeholder-response.dart';
-import 'package:developer_test/models/todo.dart';
-import 'package:developer_test/state/state.dart';
 import 'package:developer_test/widgets/button.dart';
 import 'package:developer_test/widgets/typography.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class UsersViewScreen<T> extends StatelessWidget {
   const UsersViewScreen(
@@ -100,6 +96,9 @@ class UsersViewScreen<T> extends StatelessWidget {
                       "Tap or click a user to view",
                       color: TextEmphasisColor,
                       type: TextTypes.small,
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     Expanded(
                         child: FutureBuilder<List<T>>(

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:developer_test/constants/colors.dart';
 
-import 'package:google_fonts/google_fonts.dart';
 import 'package:developer_test/widgets/typography.dart';
 
 // ignore: must_be_immutable

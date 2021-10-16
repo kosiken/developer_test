@@ -33,7 +33,6 @@ class _KosyPickerState<T> extends State<KosyPicker<T>>
   double top = 0;
   double width = 200.0;
 
-  @override
   late T selected;
   bool openModal = true;
   OverlayEntry? overlayEntry;
@@ -154,7 +153,6 @@ class _KosyPickerState<T> extends State<KosyPicker<T>>
 
   @override
   void afterFirstLayout(BuildContext context) {
-    // TODO: implement afterFirstLayout
     RenderBox box = gkey.currentContext!.findRenderObject()! as RenderBox;
     Offset position = box.localToGlobal(Offset.zero);
     top = position.dy + box.size.height - 40;

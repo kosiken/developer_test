@@ -1,7 +1,5 @@
 import 'package:developer_test/constants/colors.dart';
 import 'package:developer_test/models/json-placeholder-response.dart';
-import 'package:developer_test/models/todo.dart';
-import 'package:developer_test/state/state.dart';
 import 'package:developer_test/widgets/button.dart';
 import 'package:developer_test/widgets/typography.dart';
 import 'package:flutter/material.dart';

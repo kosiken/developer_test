@@ -151,6 +151,9 @@ class _TodoScreenState extends State<TodoScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     ),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   KosyPicker<String>(
                     items: categories,
                     onChange: (value) {

@@ -33,7 +33,7 @@ class KosyInput extends StatefulWidget {
       this.lines = 1,
       this.leftIcon,
       this.disabled})
-      : super(key: key) {}
+      : super(key: key);
 
   _KosyInputState createState() {
     state = _KosyInputState(value,

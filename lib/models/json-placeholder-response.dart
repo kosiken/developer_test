@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:developer_test/widgets/typography.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -184,7 +182,6 @@ class JsonPlaceholderApiComment implements Describeable {
 
   @override
   String toString() {
-    // TODO: implement toString
     return name;
   }
 
