@@ -1,46 +1,34 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:developer_test/debug.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:developer_test/models/json-placeholder-response.dart';
 
-const JsonPlaceholderUrl = "https://jsonplaceholder.typicode.com/todos";
+const JsonPlaceholderUrl = "https://jsonplaceholder.typicode.com";
 
-class JsonPlaceholderController {
-  JsonPlaceholderController._privateConstructor();
-  static final JsonPlaceholderController _instance =
-      JsonPlaceholderController._privateConstructor();
-  static JsonPlaceholderController get instance => _instance;
+class JsonPlaceholderController<T> {
+  final T Function(dynamic json) resolver;
+  final String attacher;
 
-  Future<List<JsonPlaceholderApiTodo>> getAllTodos() async {
-    List<JsonPlaceholderApiTodo> jsonResponse = [];
+  JsonPlaceholderController(this.resolver, this.attacher);
 
-    try {
-      var response = await http.get(Uri.parse(JsonPlaceholderUrl));
-    } catch (e) {}
+  Future<List<T>> getAllT<T>() async {
+    List<T> jsonResponse = [];
+    // try {
+    var response = await http.get(Uri.parse(JsonPlaceholderUrl + attacher));
 
-    return jsonResponse;
-  }
+    if (response.statusCode == 200) {
+      // List<dynamic> jsonMapList = ;
 
-  Future<List<JsonPlaceholderApiUser>> getAllUsers() async {
-    List<JsonPlaceholderApiUser> jsonResponse = [];
+      jsonResponse = List.from(jsonDecode(response.body).map(resolver));
 
-    try {
-      var response = await http.get(Uri.parse(JsonPlaceholderUrl + "/users"));
-
-      if (response.statusCode == 200) {
-        List<Map<String, dynamic>> jsonMapList = jsonDecode(response.body);
-
-        jsonResponse =
-            List.from(jsonMapList.map(JsonPlaceholderApiUser.fromJSON));
-
-        Debug.log(jsonResponse.first);
-      } else {
-        throw Exception('Failed to load Users');
-      }
-    } catch (e) {
-      Debug.log(e.toString());
+      Debug.log(jsonResponse.first);
+    } else {
+      throw Exception('Failed to load Todos');
     }
+    // } catch (e) {
+    //   Debug.log(e.toString());
+    // }
 
     return jsonResponse;
   }

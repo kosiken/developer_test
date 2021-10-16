@@ -1,7 +1,13 @@
+import 'package:developer_test/controllers/json-placeholder-api.dart';
+import 'package:developer_test/models/json-placeholder-response.dart';
 import 'package:developer_test/screens/add-todo-screen.dart';
 import 'package:developer_test/screens/edit-todo-screen.dart';
 import 'package:developer_test/screens/json-placeholder-consumer.dart';
 import 'package:developer_test/screens/todo-screen.dart';
+import 'package:developer_test/screens/user-view-screen.dart';
+import 'package:developer_test/screens/users-view-screen.dart';
+import 'package:developer_test/screens/view-describeable.dart';
+import 'package:developer_test/screens/view-jsonplaceholder-todo-screen.dart';
 import 'package:developer_test/screens/view-todo-screen.dart';
 import 'package:developer_test/state/state.dart';
 import 'package:developer_test/widgets/input.dart';
@@ -38,7 +44,38 @@ class MyApp extends StatelessWidget {
         routes: {
           "/": (ctx) => TodoScreen(),
           "/add-todo": (ctx) => AddTodoScreen(),
-          "/json-placeholder": (ctx) => JsonPlaceHolderScreen()
+          "/json-placeholder": (ctx) => JsonPlaceHolderScreen(),
+          "/users": (ctx) => UsersViewScreen<JsonPlaceholderApiUser>(
+                pathTogo: "/view-user",
+                controller: JsonPlaceholderController<JsonPlaceholderApiUser>(
+                    JsonPlaceholderApiUser.fromJSON, "/users"),
+              ),
+          "/todos": (ctx) => UsersViewScreen(
+                pathTogo: "/view-jsph-todo",
+                controller: JsonPlaceholderController<JsonPlaceholderApiTodo>(
+                    JsonPlaceholderApiTodo.fromJSON, "/todos"),
+              ),
+          "/posts": (ctx) => UsersViewScreen(
+                pathTogo: "/view-post",
+                controller: JsonPlaceholderController<JsonPlaceholderApiPost>(
+                    JsonPlaceholderApiPost.fromJSON, "/posts"),
+              ),
+          "/albums": (ctx) => UsersViewScreen(
+                pathTogo: "/view-album",
+                controller: JsonPlaceholderController<JsonPlaceholderApiAlbum>(
+                    JsonPlaceholderApiAlbum.fromJSON, "/albums"),
+              ),
+          "/comments": (ctx) => UsersViewScreen(
+                pathTogo: "/view-comment",
+                controller:
+                    JsonPlaceholderController<JsonPlaceholderApiComment>(
+                        JsonPlaceholderApiComment.fromJSON, "/comments"),
+              ),
+          "/photos": (ctx) => UsersViewScreen(
+                pathTogo: "/view-photo",
+                controller: JsonPlaceholderController<JsonPlaceholderApiPhoto>(
+                    JsonPlaceholderApiPhoto.fromJSON, "/photos"),
+              ),
         });
   }
 
@@ -54,6 +91,48 @@ class MyApp extends StatelessWidget {
         case "/edit-todo":
           Todo todo = settings.arguments! as Todo;
           screen = EditTodoScreen(todo: todo);
+          break;
+
+        case "/view-user":
+          JsonPlaceholderApiUser user =
+              settings.arguments! as JsonPlaceholderApiUser;
+          screen = UserViewScreen(user: user);
+          break;
+
+        case "/view-jsph-todo":
+          JsonPlaceholderApiTodo todo =
+              settings.arguments! as JsonPlaceholderApiTodo;
+          screen = ViewJPLHTodoScreen(todo: todo);
+          break;
+        case "/view-post":
+          JsonPlaceholderApiPost object =
+              settings.arguments! as JsonPlaceholderApiPost;
+          screen = ViewDescribeableScreen<JsonPlaceholderApiPost>(
+            object: object,
+          );
+          break;
+
+        case "/view-comment":
+          JsonPlaceholderApiComment object =
+              settings.arguments! as JsonPlaceholderApiComment;
+          screen = ViewDescribeableScreen<JsonPlaceholderApiComment>(
+            object: object,
+          );
+          break;
+        case "/view-album":
+          JsonPlaceholderApiAlbum object =
+              settings.arguments! as JsonPlaceholderApiAlbum;
+          screen = ViewDescribeableScreen<JsonPlaceholderApiAlbum>(
+            object: object,
+          );
+          break;
+
+        case "/view-photo":
+          JsonPlaceholderApiPhoto object =
+              settings.arguments! as JsonPlaceholderApiPhoto;
+          screen = ViewDescribeableScreen<JsonPlaceholderApiPhoto>(
+            object: object,
+          );
           break;
         default:
           Debug.log("Not supposed to reach here");

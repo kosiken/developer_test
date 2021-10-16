@@ -1,10 +1,7 @@
 import 'package:developer_test/constants/colors.dart';
-import 'package:developer_test/models/todo.dart';
-import 'package:developer_test/state/state.dart';
 import 'package:developer_test/widgets/button.dart';
 import 'package:developer_test/widgets/typography.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class JsonPlaceHolderScreen extends StatelessWidget {
   const JsonPlaceHolderScreen({Key? key});
@@ -32,7 +29,66 @@ class JsonPlaceHolderScreen extends StatelessWidget {
                         clickFunc:
                             Navigator.of(context, rootNavigator: true).pop,
                         child: "Back"),
-                    Expanded(child: ListView(children: []))
+                    Expanded(
+                        child: ListView(children: [
+                      KosyTextButton(
+                        clickFunc: () {
+                          Navigator.of(context).pushNamed("/users");
+                        },
+                        child: "users",
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      KosyTextButton(
+                        clickFunc: () {
+                          Navigator.of(context).pushNamed("/todos");
+                        },
+                        child: "todos",
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      KosyTextButton(
+                        clickFunc: () {
+                          Navigator.of(context).pushNamed("/posts");
+                        },
+                        child: "posts",
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      KosyTextButton(
+                        clickFunc: () {
+                          Navigator.of(context).pushNamed("/albums");
+                        },
+                        child: "albums",
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      KosyTextButton(
+                        clickFunc: () {
+                          Navigator.of(context).pushNamed("/photos");
+                        },
+                        child: "photos",
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      KosyTextButton(
+                        clickFunc: () {
+                          Navigator.of(context).pushNamed("/comments");
+                        },
+                        child: "comments",
+                        color: Colors.blue,
+                      ),
+                    ]))
                   ],
                 ),
               ),
